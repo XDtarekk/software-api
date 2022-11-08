@@ -24,5 +24,6 @@ class CustomerController extends Controller
         $customer->address =$request->input('address');
         $customer->password =$request->input('password');
         $customer->save();
+        return response()->json($customer);
     }
 }

@@ -12,7 +12,7 @@ class Flight extends Model
     protected $fillable=[
         'from',
         'destination',
-        'departOn',
+        'departON',
         'returnOn',
         'seatClass',
         'numberOfStops',
