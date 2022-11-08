@@ -19,11 +19,11 @@ return new class extends Migration
             $table->string('from');
             $table->string('destination');
             $table->string('departON');
-            $table->integer('returnOn');
+            $table->string('returnOn');
             $table->string('seatClass');
             $table->string('numberOfStops');
             $table->string('RorO');
-            $table->string('numberOfTickets');
+            $table->integer('numberOfTickets');
 
             $table->timestamps();
         });
