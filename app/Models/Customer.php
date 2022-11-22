@@ -17,6 +17,7 @@ class Customer extends Model
         'county',
         'city',
         'address',
-        'password'
+        'password',
+        'pass_conf'
     ];
 }

@@ -19,11 +19,12 @@ class AuthController extends Controller
                 'county'=>'required|string',
                 'city'=>'required|string',
                 'address'=>'required|string',
-                'password'=>'required|string|confirmed'
+                'password'=>'string|required',
+                'pass_conf' => 'string|required'
             ]
         );
 
-        $customer= Customer::create([
+        $customer= Customer::create(array(
                 'name'=>$fields['name'],
                 'dateOfBirth'=>$fields['dateOfBirth'],
                 'email'=>$fields['email'],
@@ -31,19 +32,32 @@ class AuthController extends Controller
                 'county'=>$fields['county'],
                 'city'=>$fields['city'],
                 'address'=>$fields['address'],
-                'password'=>bcrypt($fields['password'])
-            ]
+                'password'=>bcrypt($fields['password']),
+                'pass_conf'=>bcrypt($fields['pass_conf'])   ,
+            )
         );
+        if ( $fields['password']== $fields['pass_conf']){
 
-        $token=$customer->createToken('myapptolen')->plainTextToken;
+            $token=$customer->createToken('myapptolen')->plainTextToken;
 
-        $response=[
-            'customer'=>$customer,
-            'token'=>$token
-        ];
+//            $response=[
+//                'customer'=>$customer->email,
+//                'token'=>$token
+//            ];
 
-        return response($response,201);
+            return response(
+                ['status'=>200,
+                    'customer'=>$customer->email,
+                    'token'=>$token]
+                    );
+        }else{
+            return response([
+                'message'=>'password confirmation is incorrect'
+            ],401
+            );
+        }
     }
+
 
     public function login(Request $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
     {
