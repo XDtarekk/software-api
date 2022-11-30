@@ -18,6 +18,7 @@ use App\Http\Controllers\API\FlightController;
 */
 
 Route::get('/Flight', [FlightController::class, 'index']);
+Route::put('/show-Flights/{id}', [FlightController::class, 'show']);
 Route::post('/add-Flight', [FlightController::class, 'store']);
 Route::put('/update-Flights/{id}', [FlightController::class, 'update']);
 Route::delete('/delete-Flights/{id}', [FlightController::class, 'destroy']);
