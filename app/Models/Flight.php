@@ -17,6 +17,7 @@ class Flight extends Model
         'seatClass',
         'numberOfStops',
         'RorO',
-        'numberOfTickets'
+        'numberOfTickets',
+        'image'
     ];
 }
