@@ -24,9 +24,10 @@ return new class extends Migration
             $table->string('numberOfStops');
             $table->string('RorO');
             $table->integer('numberOfTickets');
+            $table->string('price');
             $table->string('image');
 
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 

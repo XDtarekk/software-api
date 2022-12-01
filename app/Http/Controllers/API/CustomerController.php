@@ -19,7 +19,7 @@ class CustomerController extends Controller
         $customer->dateOfBirth =$request->input('dateOfBirth');
         $customer->email =$request->input('email');
         $customer->number =$request->input('number');
-        $customer->county =$request->input('county');
+        $customer->country =$request->input('county');
         $customer->city =$request->input('city');
         $customer->address =$request->input('address');
         $customer->password =$request->input('password');

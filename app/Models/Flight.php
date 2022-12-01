@@ -9,6 +9,7 @@ class Flight extends Model
 {
     use HasFactory;
     protected $table = 'flights';
+    public $timestamps = false;
     protected $fillable=[
         'from',
         'destination',
@@ -18,6 +19,7 @@ class Flight extends Model
         'numberOfStops',
         'RorO',
         'numberOfTickets',
+        'price',
         'image'
     ];
 }

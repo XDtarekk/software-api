@@ -19,14 +19,14 @@ return new class extends Migration
             $table->string('dateOfBirth');
             $table->string('email');
             $table->integer('number');
-            $table->string('county');
+            $table->string('country');
             $table->string('city');
             $table->string('address');
             $table->string('password');
             //confirm_password
             $table->string('pass_conf');
 
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 
