@@ -48,6 +48,7 @@ class FlightController extends Controller
                 'numberOfStops'=>'required|string',
                 'RorO'=>'required|string',
                 'numberOfTickets'=>'required',
+                'price'=>'required|string',
                 'image' => 'string|image|mimes:jpeg,png,jpg|max:2048'
             ]
         );
@@ -69,6 +70,7 @@ class FlightController extends Controller
             $flight->numberOfStops =$request->input('numberOfStops');
             $flight->RorO =$request->input('RorO');
             $flight->numberOfTickets =$request->input('numberOfTickets');
+            $flight->price =$request->input('price');
             //$flight->numberOfTickets =$request->input('image');
             if ($request->hasFile('image'))
             {

@@ -9,12 +9,13 @@ class Customer extends Model
 {
     use HasFactory, HasApiTokens;
     protected $table = 'customers';
+    public $timestamps = false;
     protected $fillable=[
         'name',
         'dateOfBirth',
         'email',
         'number',
-        'county',
+        'country',
         'city',
         'address',
         'password',

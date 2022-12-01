@@ -28,9 +28,13 @@ Route::post('/add-Customer', [CustomerController::class, 'store']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+
+
 Route::group(
 ['middleware'=>['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    //cart routes
+    Route::post('/add-to-cart', [\App\Http\Controllers\API\CartController::class, 'add']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
