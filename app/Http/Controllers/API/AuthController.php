@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+
+    public function index(){
+        $customer= Customer::all();
+        return response()->json(['customer'=>$customer]);
+    }
+
+    public function show(Request $request){
+        $customer = auth('sanctum')->user()->all();
+        //$flight=Flight::find($flight->id);
+        return response()->json(['customer'=>$customer]);
+    }
+
     public function register(Request $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
     {
         $fields= $request->validate([

@@ -23,7 +23,7 @@ Route::post('/add-Flight', [FlightController::class, 'store']);
 Route::put('/update-Flights/{id}', [FlightController::class, 'update']);
 Route::delete('/delete-Flights/{id}', [FlightController::class, 'destroy']);
 
-//Route::get('/Customer', [CustomerController::class, 'index']);
+Route::get('/Customer', [AuthController::class, 'index']);
 Route::post('/add-Customer', [CustomerController::class, 'store']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -35,6 +35,8 @@ Route::group(
     Route::post('/logout', [AuthController::class, 'logout']);
     //cart routes
     Route::post('/add-to-cart', [\App\Http\Controllers\API\CartController::class, 'add']);
+    //get the logged in customer's data
+    Route::post('/logged-Customer', [AuthController::class, 'show']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
