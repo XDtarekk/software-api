@@ -15,4 +15,10 @@ class Cart extends Model
         'flight_id',
         'ticket_qty'
     ];
+
+    protected $with= ['flight'];
+    public function flight()
+    {
+        return $this->belongsTo(Flight::class, 'flight_id', 'id');
+    }
 }

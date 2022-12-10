@@ -51,4 +51,50 @@ class CartController extends Controller
                 'message'=>'not in cart']);
         }
     }
+
+    public function show ()
+    {
+        if (auth('sanctum')->check())
+        {
+            $customer_id = auth('sanctum')->user()->id;
+            $cartitem= Cart::where('customer_id', $customer_id)->get();
+            return response()->json([
+                'status'=>200,
+                'cart'=>$cartitem]);
+
+        }
+        else
+        {
+            return response()->json([
+                'status'=>401,
+                'message'=>'not logged in to view cart']);
+        }
+    }
+    public function deleteItem($cart_id)
+    {
+        if (auth('sanctum')->check())
+        {
+            $customer_id = auth('sanctum')->user()->id;
+            $cartitem= Cart::where('id',$cart_id)->where('customer_id', $customer_id)->first();
+            if ($cartitem)
+            {
+                $cartitem->delete();
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'cart item removed']);
+            }
+            else
+            {
+                return response()->json([
+                    'status'=>404,
+                    'message'=>'cart item not found']);
+            }
+        }
+        else
+        {
+            return response()->json([
+                'status'=>401,
+                'message'=>'not logged in to view cart']);
+        }
+    }
 }

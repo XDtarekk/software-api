@@ -33,10 +33,14 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::group(
 ['middleware'=>['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    //cart routes
-    Route::post('/add-to-cart', [\App\Http\Controllers\API\CartController::class, 'add']);
     //get the logged in customer's data
     Route::post('/logged-Customer', [AuthController::class, 'show']);
+    //cart routes
+    Route::post('/add-to-cart', [\App\Http\Controllers\API\CartController::class, 'add']);
+    //show products added to cart in cart page
+    Route::get('/cart', [\App\Http\Controllers\API\CartController::class, 'show']);
+    //delete a single item from cart
+    Route::delete('/delete-item/{$cart_id}',[\App\Http\Controllers\API\CartController::class, 'deleteItem'] );
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
