@@ -41,6 +41,8 @@ Route::group(
     Route::get('/cart', [\App\Http\Controllers\API\CartController::class, 'show']);
     //delete a single item from cart
     Route::delete('/delete-item/{$cart_id}',[\App\Http\Controllers\API\CartController::class, 'deleteItem'] );
+    //checkout
+    Route::post('/place-order', [\App\Http\Controllers\API\CheckoutController::class, 'place']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

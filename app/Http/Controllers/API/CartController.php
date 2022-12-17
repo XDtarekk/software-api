@@ -11,7 +11,8 @@ class CartController extends Controller
 {
     public function add(Request $request){
         if (auth('sanctum')->check()) {
-            $customer_id = auth('sanctum')->user()->id;
+            $customer_id = $request->customer_id;
+            //$customer_id = auth('sanctum')->user()->email;
             $flight_id = $request->flight_id;
             $ticket_qty = $request->ticket_qty;
 
