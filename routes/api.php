@@ -43,6 +43,8 @@ Route::group(
     Route::delete('/delete-item/{$cart_id}',[\App\Http\Controllers\API\CartController::class, 'deleteItem'] );
     //checkout
     Route::post('/place-order', [\App\Http\Controllers\API\CheckoutController::class, 'place']);
+    //test get id
+    Route::get('/getId', [AuthController::class, 'getId']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

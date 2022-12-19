@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -21,6 +22,16 @@ class AuthController extends Controller
         return response()->json(['customer'=>$customer]);
     }
 
+    public function getId(){
+        //$customerID=Auth::user()->id;
+        $customerID = auth('sanctum')->user()->id;
+        return response(
+            [//'status'=>200,
+                'customer1'=>$customerID,
+                //'token'=>$token
+            ]
+        );
+    }
     public function register(Request $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
     {
         $fields= $request->validate([

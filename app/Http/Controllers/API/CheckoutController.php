@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class CheckoutController extends Controller
@@ -15,7 +16,7 @@ class CheckoutController extends Controller
     {
         if (auth('sanctum')->check()) {
             $validator= Validator::make($request->all(),[
-                    //'customer_id'=>'required|string',
+                    //'customer_id'=>'max:200',
                     //'name'=>'required|string',
                     //'email'=>'required|string|unique:customers,email',
                     //'number'=>'required|string',
@@ -34,7 +35,8 @@ class CheckoutController extends Controller
             }
             else
             {
-                $customer_id = auth('sanctum')->user()->id;
+                //$customer_id = auth('sanctum')->user()->id;
+                $customer_id=Auth::user()->id;
                 $order = new Order;
                 $order->customer_id= $customer_id;
 //                $order->name= $request->name;
@@ -48,21 +50,22 @@ class CheckoutController extends Controller
                 $order->save();
 
                 $cart= Cart::where('customer_id', $customer_id)->get();
-                $orderitems=[];
 
+                $orderitems=[];
                 foreach ($cart as $item)
                 {
                     $orderitems[]=[
+                        //'order_id'=>$item->order_id,
                         'flight_id'=>$item->flight_id,
                         'ticket_qty'=>$item->ticket_qty,
-                        'price'=>$item->flight->selling_price,
+                        'price'=>$item->flight->price,
                     ];
                     $item->flight->update([
                        'numberOfTickets'=>$item->flight->numberOfTickets -$item->ticket_qty
                     ]);
                 }
-
                 $order->orderitems()->createMany($orderitems);
+                //$order->orderitems()->createMany($orderitems);
                 Cart::destroy($cart);
 
                 return response()->json([
